@@ -1,0 +1,8 @@
+--transporte dados
+
+hdfs dfs -copyFromLocal ./d_customer* /user/hive/warehouse/d_customer
+hdfs dfs -copyFromLocal ./d_product* /user/hive/warehouse/d_product
+hdfs dfs -copyFromLocal ./d_seller* /user/hive/warehouse/d_seller
+hdfs dfs -copyFromLocal ./d_geolocation* /user/hive/warehouse/d_geolocation
+hdfs dfs -copyFromLocal ./d_date* /user/hive/warehouse/d_date
+hdfs dfs -copyFromLocal ./f_sale* /user/hive/warehouse/f_sale

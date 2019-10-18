@@ -1,0 +1,21 @@
+-- Ferramentas e ambiente
+Ambiente Linux
+Python 3.7
+Anaconda3 2019.03
+https://www.anaconda.com/distribution/
+https://repo.continuum.io/archive/
+
+Apache Spark 2.4.2
+http://spark.apache.org/
+https://archive.apache.org/dist/spark/spark-2.4.2/spark-2.4.2-bin-hadoop2.7.tgz
+
+Java
+https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html
+
+Cloudera
+https://www.cloudera.com/downloads.html
+
+--Basic Authentication Header Generator
+https://www.blitter.se/utils/basic-authentication-header-generator/
+ADMIN
+KYLIN

@@ -1,0 +1,59 @@
+{
+  "uuid": "fe04b3c9-73a5-41a4-8368-0949a8621d94",
+  "last_modified": 1571344805560,
+  "version": "2.3.1.0",
+  "name": "SalesModel",
+  "owner": "ADMIN",
+  "is_draft": false,
+  "description": "",
+  "fact_table": "DEFAULT.F_SALE",
+  "lookups": [
+    {
+      "table": "DEFAULT.D_DATE",
+      "kind": "FACT",
+      "alias": "D_DATE",
+      "join": {
+        "type": "inner",
+        "primary_key": [
+          "D_DATE.DATE_ID"
+        ],
+        "foreign_key": [
+          "F_SALE.DATE_ID"
+        ]
+      }
+    }
+  ],
+  "dimensions": [
+    {
+      "table": "F_SALE",
+      "columns": [
+        "CUSTOMER_ID",
+        "DATE_ID",
+        "PRODUCT_ID"
+      ]
+    },
+    {
+      "table": "D_DATE",
+      "columns": [
+        "DATE_ID",
+        "ORDER_PURCHASE",
+        "YEAR"
+      ]
+    }
+  ],
+  "metrics": [
+    "F_SALE.PRICE",
+    "F_SALE.FREIGHT"
+  ],
+  "filter_condition": "F_SALE.date_id <= 20161231",
+  "partition_desc": {
+    "partition_date_column": "F_SALE.DATE_ID",
+    "partition_time_column": null,
+    "partition_date_start": 0,
+    "partition_date_format": "yyyyMMdd",
+    "partition_time_format": "HH:mm:ss",
+    "partition_type": "APPEND",
+    "partition_condition_builder": "org.apache.kylin.metadata.model.PartitionDesc$DefaultPartitionConditionBuilder"
+  },
+  "capacity": "MEDIUM"
+}

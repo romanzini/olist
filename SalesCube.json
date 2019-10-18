@@ -1,0 +1,167 @@
+{
+  "uuid": "dce4ed97-d80a-43c6-952c-3739d8f7ec43",
+  "last_modified": 1571344552843,
+  "version": "2.3.1.0",
+  "name": "SalesCube",
+  "is_draft": false,
+  "model_name": "SalesModel",
+  "description": "",
+  "null_string": null,
+  "dimensions": [
+    {
+      "name": "CUSTOMER_ID",
+      "table": "F_SALE",
+      "column": "CUSTOMER_ID",
+      "derived": null
+    },
+    {
+      "name": "DATE_ID",
+      "table": "F_SALE",
+      "column": "DATE_ID",
+      "derived": null
+    },
+    {
+      "name": "PRODUCT_ID",
+      "table": "F_SALE",
+      "column": "PRODUCT_ID",
+      "derived": null
+    },
+    {
+      "name": "ORDER_PURCHASE",
+      "table": "D_DATE",
+      "column": "ORDER_PURCHASE",
+      "derived": null
+    },
+    {
+      "name": "YEAR",
+      "table": "D_DATE",
+      "column": "YEAR",
+      "derived": null
+    }
+  ],
+  "measures": [
+    {
+      "name": "_COUNT_",
+      "function": {
+        "expression": "COUNT",
+        "parameter": {
+          "type": "constant",
+          "value": "1"
+        },
+        "returntype": "bigint"
+      }
+    },
+    {
+      "name": "TOTAL_SALES",
+      "function": {
+        "expression": "SUM",
+        "parameter": {
+          "type": "column",
+          "value": "F_SALE.PRICE"
+        },
+        "returntype": "double"
+      }
+    },
+    {
+      "name": "TOTAL_FREIGHT",
+      "function": {
+        "expression": "SUM",
+        "parameter": {
+          "type": "column",
+          "value": "F_SALE.FREIGHT"
+        },
+        "returntype": "double"
+      }
+    }
+  ],
+  "dictionaries": [],
+  "rowkey": {
+    "rowkey_columns": [
+      {
+        "column": "F_SALE.CUSTOMER_ID",
+        "encoding": "dict",
+        "isShardBy": false
+      },
+      {
+        "column": "F_SALE.DATE_ID",
+        "encoding": "dict",
+        "isShardBy": false
+      },
+      {
+        "column": "F_SALE.PRODUCT_ID",
+        "encoding": "dict",
+        "isShardBy": false
+      },
+      {
+        "column": "D_DATE.ORDER_PURCHASE",
+        "encoding": "dict",
+        "isShardBy": false
+      },
+      {
+        "column": "D_DATE.YEAR",
+        "encoding": "dict",
+        "isShardBy": false
+      }
+    ]
+  },
+  "hbase_mapping": {
+    "column_family": [
+      {
+        "name": "F1",
+        "columns": [
+          {
+            "qualifier": "M",
+            "measure_refs": [
+              "_COUNT_",
+              "TOTAL_SALES",
+              "TOTAL_FREIGHT"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "aggregation_groups": [
+    {
+      "includes": [
+        "F_SALE.CUSTOMER_ID",
+        "F_SALE.DATE_ID",
+        "F_SALE.PRODUCT_ID",
+        "D_DATE.ORDER_PURCHASE",
+        "D_DATE.YEAR"
+      ],
+      "select_rule": {
+        "hierarchy_dims": [
+          [
+            "D_DATE.YEAR",
+            "D_DATE.ORDER_PURCHASE"
+          ]
+        ],
+        "mandatory_dims": [],
+        "joint_dims": []
+      }
+    }
+  ],
+  "signature": "JIel19MPA1+gLQjXZMv+ZQ==",
+  "notify_list": [],
+  "status_need_notify": [
+    "ERROR",
+    "DISCARDED",
+    "SUCCEED"
+  ],
+  "partition_date_start": 1472688000000,
+  "partition_date_end": 3153600000000,
+  "auto_merge_time_ranges": [
+    604800000,
+    2419200000
+  ],
+  "volatile_range": 0,
+  "retention_range": 0,
+  "engine_type": 2,
+  "storage_type": 2,
+  "override_kylin_properties": {},
+  "cuboid_black_list": [],
+  "parent_forward": 3,
+  "mandatory_dimension_set_list": []
+}
+Total: 1

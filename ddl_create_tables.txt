@@ -1,0 +1,47 @@
+--Script create tables
+
+drop table d_date;  
+create external table d_date (date_id string, order_purchase string, day_of_month int, day_of_week int, day_of_year int, month int, quarter int, week_of_year int, year int)
+  ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
+  STORED AS 
+    INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
+    OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
+    LOCATION '/user/hive/warehouse/d_date';
+
+drop table d_customer;  
+create external table d_customer (customer_id STRING, customer_unique_id STRING)
+  ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
+  STORED AS 
+    INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
+    OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
+    LOCATION '/user/hive/warehouse/d_customer';
+    
+drop table d_product;    
+create external table d_product (product_id STRING, product_category_name STRING, product_name_lenght int, product_description_lenght int, product_photos_qty int, product_weight_g int, product_length_cm int, product_height_cm int, product_width_cm int)
+  ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
+  STORED AS 
+    INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
+    OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
+    LOCATION '/user/hive/warehouse/d_product';    
+    
+drop table d_seller;
+create external table d_seller (seller_id STRING)
+    INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
+    OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
+    LOCATION '/user/hive/warehouse/d_seller';    
+
+DROP TABLE d_geolocation;
+create external table d_geolocation (geolocation_id int, geolocation_lat double, geolocation_lng double, geolocation_city STRING, geolocation_state STRING)
+  ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
+  STORED AS 
+    INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
+    OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
+    LOCATION '/user/hive/warehouse/d_geolocation';    
+
+DROP TABLE f_sale;
+create external table f_sale (order_id string, customer_id string, order_status string, date_id string, product_id string, seller_id string, price double, freight double, geolocation_customer_id int, geolocation_saller_id int)  
+ ROW FORMAT SERDE 'parquet.hive.serde.ParquetHiveSerDe'
+  STORED AS 
+    INPUTFORMAT "parquet.hive.DeprecatedParquetInputFormat"
+    OUTPUTFORMAT "parquet.hive.DeprecatedParquetOutputFormat"
+    LOCATION '/user/hive/warehouse/f_sale';
